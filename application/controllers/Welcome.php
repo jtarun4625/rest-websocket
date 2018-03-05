@@ -30,9 +30,27 @@ class Welcome extends CI_Controller {
         $this->load->database();
         echo json_encode($this->getLastPagination());
     }
+
+    public function getFan(){
+        $this->load->database();
+        echo json_encode($this->getLastFan());
+    }
     function getLastPagination(){
 
         $query ="select * from data order by id DESC limit 1";
+
+        $res = $this->db->query($query);
+
+        if($res->num_rows() > 0) {
+            return $res->result("array");
+        }
+        return array();
+    }
+
+
+    function getLastFan(){
+
+        $query ="select * from fan order by id DESC limit 1";
 
         $res = $this->db->query($query);
 
